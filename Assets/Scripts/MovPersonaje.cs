@@ -20,8 +20,11 @@ public class MovPersonaje : MonoBehaviour
     void Update()
     {
         float movTeclas = Input.GetAxis("Horizontal"); //(a -1f - d 1f)
+        //float movTeclasY = Input.GetAxis("Vertical"); //(a -1f - d 1f)
 
         float miDeltaTime = Time.deltaTime;
+
+        rb.velocity = new Vector2(movTeclas*multiplicador, rb.velocity.y);
 
         Debug.Log(Time.deltaTime);
 
