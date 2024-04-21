@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class MovPersonaje : MonoBehaviour
 {
-    public float multiplicador = 15f;
+    public float velocity = 1f;
+    private float multiplicador = 15f;
 
-    public float multiplicadorSalto = 15f;
+    private float multiplicadorSalto = 8f;
 
     private bool puedoSaltar = true;
 
     private Rigidbody2D rb;
+
+    private Animator animatorController;
+
+    GameObject respawn;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>( );
 
-        transform.position = new Vector3( -9f, 0f, 0);
+        animatorController = this.GetComponent<Animator>();
+
+        //transform.position = new Vector3( -9f, 0f, 0);
+
+        //Respawn
+        respawn = GameObject.Find("Respawn");
+        Respawnear();
+        //transform.position = respawn.transform.position;
     }
 
     // Update is called once per frame
@@ -39,6 +51,12 @@ public class MovPersonaje : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = false;
         }
 
+        //Animation Walking
+         if(movTeclas != 0){
+            animatorController.SetBool("activaCamina", true);
+        }else{
+            animatorController.SetBool("activaCamina", false);
+        }
         
         /*Debug.Log(Time.deltaTime);
 
@@ -68,10 +86,21 @@ public class MovPersonaje : MonoBehaviour
                 puedoSaltar = false;
         }
 
+        if(transform.position.y <= -7){
+            Respawnear();
+        }   
+    }
+    public void Respawnear( ){
+
+        Debug.Log("vidas: "+GameManager.vidas);
+        GameManager.vidas = GameManager.vidas -1;
+        Debug.Log("vidas: "+GameManager.vidas);
+
+        transform.position = respawn.transform.position;
     }
 
-
-
+}
+        
     /*
     void OnCollisionEnter2D() {
         puedoSaltar = true;
@@ -79,4 +108,4 @@ public class MovPersonaje : MonoBehaviour
       
     }*/
     
-}
+
