@@ -4,43 +4,79 @@ using UnityEngine;
 
 public class MovPersonaje : MonoBehaviour
 {
-    public float multiplicador = 5f;
+    public float multiplicador = 15f;
 
-    public float multiplicadorSalto = 5f;
+    public float multiplicadorSalto = 15f;
+
+    private bool puedoSaltar = true;
 
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>( );
+        rb = this.GetComponent<Rigidbody2D>( );
+
+        transform.position = new Vector3( -9f, 0f, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        float movTeclas = Input.GetAxis("Horizontal"); //(a -1f - d 1f)
-        //float movTeclasY = Input.GetAxis("Vertical"); //(a -1f - d 1f)
-
         float miDeltaTime = Time.deltaTime;
 
+        //movimiento personaje
+         float movTeclas = Input.GetAxis("Horizontal"); //(a -1f - d 1f)
+        //float movTeclasY = Input.GetAxis("Vertical"); //(a -1f - d 1f)
+        
         rb.velocity = new Vector2(movTeclas*multiplicador, rb.velocity.y);
 
-        Debug.Log(Time.deltaTime);
+
+        //FLIP <--
+        if(movTeclas < 0){
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }else if(movTeclas > 0){
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        
+        /*Debug.Log(Time.deltaTime);
 
         transform.Translate(
             movTeclas*(Time.deltaTime*multiplicador),
             0,
             0
-        );
+        );*/
 
         //Salto
-        if(Input.GetKeyDown(KeyCode.Space)){
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down,0.5f);
+
+        Debug.DrawRay(transform.position, Vector2.down, Color.red);
+
+        if(hit){
+            puedoSaltar = true;
+            Debug.Log(hit.collider.name);    
+        }else{
+            puedoSaltar = false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space)&& puedoSaltar){
             rb.AddForce(
                 new Vector2(0,multiplicadorSalto),
                 ForceMode2D.Impulse
                 );
+                puedoSaltar = false;
         }
 
     }
+
+
+
+    /*
+    void OnCollisionEnter2D() {
+        puedoSaltar = true;
+        Debug.Log("Collision");
+      
+    }*/
+    
 }
