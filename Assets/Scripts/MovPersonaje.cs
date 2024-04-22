@@ -17,6 +17,7 @@ public class MovPersonaje : MonoBehaviour
 
     GameObject respawn;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +29,16 @@ public class MovPersonaje : MonoBehaviour
 
         //Respawn
         respawn = GameObject.Find("Respawn");
-        Respawnear();
+        //Respawnear();
+        transform.position = respawn.transform.position;
         //transform.position = respawn.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.estoyMuerto) return;
+
         float miDeltaTime = Time.deltaTime;
 
         //movimiento personaje
@@ -85,11 +89,19 @@ public class MovPersonaje : MonoBehaviour
                 );
                 puedoSaltar = false;
         }
-
+        //comprobar si me he salido de la pantalla
         if(transform.position.y <= -7){
             Respawnear();
         }   
+
+        //0 vidas
+        if(GameManager.vidas <= 0)
+        {
+            GameManager.estoyMuerto = true;
+        }
     }
+
+
     public void Respawnear( ){
 
         Debug.Log("vidas: "+GameManager.vidas);
