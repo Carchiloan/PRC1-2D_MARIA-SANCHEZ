@@ -11,6 +11,8 @@ public class MovPersonaje : MonoBehaviour
 
     private bool puedoSaltar = true;
 
+    public static bool miraDerecha = true;
+
     private Rigidbody2D rb;
 
     private Animator animatorController;
@@ -51,8 +53,10 @@ public class MovPersonaje : MonoBehaviour
         //FLIP <--
         if(movTeclas < 0){
             this.GetComponent<SpriteRenderer>().flipX = true;
+            miraDerecha = false;
         }else if(movTeclas > 0){
             this.GetComponent<SpriteRenderer>().flipX = false;
+            miraDerecha = true;
         }
 
         //Animation Walking
@@ -62,13 +66,6 @@ public class MovPersonaje : MonoBehaviour
             animatorController.SetBool("activaCamina", false);
         }
         
-        /*Debug.Log(Time.deltaTime);
-
-        transform.Translate(
-            movTeclas*(Time.deltaTime*multiplicador),
-            0,
-            0
-        );*/
 
         //Salto
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down,0.5f);
