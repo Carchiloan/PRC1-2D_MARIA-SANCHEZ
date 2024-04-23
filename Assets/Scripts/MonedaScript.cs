@@ -22,8 +22,8 @@ public class MonedaScript : MonoBehaviour
 
         if(col.name == "Personaje"){
             GameManager.puntos += 1;
-
-            Destroy(this.gameObject, 0.30f);
+            miAnimadorController.SetBool("monedaDestruir", true);
+            Destroy(this.gameObject, 3.30f);
         }
 
     }

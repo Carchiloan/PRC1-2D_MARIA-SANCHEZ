@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6363563168495981336}
   - component: {fileID: -8569846206979043904}
   - component: {fileID: 8956899234468379742}
+  - component: {fileID: 4836072182914847240}
   m_Layer: 0
   m_Name: Fantasma
   m_TagString: Enemigo
@@ -123,3 +124,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4836072182914847240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384259795469490269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced17c9e85493a143ac5c6900792504d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

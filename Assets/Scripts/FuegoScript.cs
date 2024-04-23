@@ -30,7 +30,7 @@ public class FuegoScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col){
         //col.gameObject.name;
-        Debug.Log(col.gameObject.name.StartWith("Fantasma"));
+        //Debug.Log(col.gameObject.name.StartWith("Fantasma"));
 
         /*if(col.gameObject.name.StratWith("Fantasma")){
             Destroy(col.gameObject);

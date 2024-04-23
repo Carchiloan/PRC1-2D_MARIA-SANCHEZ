@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class MovPersonaje : MonoBehaviour
 {
-    public float velocity = 1f;
-    private float multiplicador = 15f;
+//float velocity = 1f;
+    public float multiplicador = 15f;
 
     private float multiplicadorSalto = 8f;
 
     private bool puedoSaltar = true;
 
-    public static bool miraDerecha = true;
+    public bool miraDerecha = true;
 
     private Rigidbody2D rb;
 
     private Animator animatorController;
 
     GameObject respawn;
+
+    float movTeclas;
 
 
     // Start is called before the first frame update
@@ -44,10 +46,9 @@ public class MovPersonaje : MonoBehaviour
         float miDeltaTime = Time.deltaTime;
 
         //movimiento personaje
-         float movTeclas = Input.GetAxis("Horizontal"); //(a -1f - d 1f)
+          movTeclas = Input.GetAxis("Horizontal"); //(a -1f - d 1f)
         //float movTeclasY = Input.GetAxis("Vertical"); //(a -1f - d 1f)
         
-        rb.velocity = new Vector2(movTeclas*multiplicador, rb.velocity.y);
 
 
         //FLIP <--
@@ -96,6 +97,11 @@ public class MovPersonaje : MonoBehaviour
         {
             GameManager.estoyMuerto = true;
         }
+    }
+
+     void FixedUpdate() {
+                rb.velocity = new Vector2(movTeclas*multiplicador, rb.velocity.y);
+
     }
 
 
