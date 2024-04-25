@@ -11,6 +11,10 @@ public class MovPersonaje : MonoBehaviour
 
     private bool puedoSaltar = true;
 
+    private bool activaSaltoFixed = false;
+
+    float movTeclas;
+
     public bool miraDerecha = true;
 
     private Rigidbody2D rb;
@@ -18,8 +22,6 @@ public class MovPersonaje : MonoBehaviour
     private Animator animatorController;
 
     GameObject respawn;
-
-    float movTeclas;
 
 
     // Start is called before the first frame update
@@ -70,23 +72,29 @@ public class MovPersonaje : MonoBehaviour
 
         //Salto
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down,0.5f);
-
         Debug.DrawRay(transform.position, Vector2.down, Color.red);
 
         if(hit){
             puedoSaltar = true;
-            Debug.Log(hit.collider.name);    
+            //Debug.Log(hit.collider.name);    
         }else{
             puedoSaltar = false;
         }
 
         if(Input.GetKeyDown(KeyCode.Space)&& puedoSaltar){
+            activaSaltoFixed = true;
+        }
+        
+        //PuedoSaltarFixed
+        /*{
             rb.AddForce(
                 new Vector2(0,multiplicadorSalto),
                 ForceMode2D.Impulse
                 );
                 puedoSaltar = false;
-        }
+        }*/
+
+
         //comprobar si me he salido de la pantalla
         if(transform.position.y <= -7){
             Respawnear();
@@ -101,6 +109,14 @@ public class MovPersonaje : MonoBehaviour
 
      void FixedUpdate() {
                 rb.velocity = new Vector2(movTeclas*multiplicador, rb.velocity.y);
+
+                if(activaSaltoFixed == true){
+                    rb.AddForce(
+                    new Vector2(0,multiplicadorSalto),
+                    ForceMode2D.Impulse
+                    );
+                    activaSaltoFixed = false;
+                }
 
     }
 

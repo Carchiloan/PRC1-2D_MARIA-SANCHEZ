@@ -10,6 +10,8 @@ public class FuegoScript : MonoBehaviour
 
     public float speedBala = 5.0f;
 
+    float tiempoDestruccion = 5.0f;
+
     float queHoraEs;
 
     // Start is called before the first frame update
@@ -17,6 +19,8 @@ public class FuegoScript : MonoBehaviour
     {
         personaje = GameObject.Find("Personaje");
         bolaDerecha = personaje.GetComponent<MovPersonaje>().miraDerecha;
+
+        queHoraEs = Time.time;
     }
 
     // Update is called once per frame
