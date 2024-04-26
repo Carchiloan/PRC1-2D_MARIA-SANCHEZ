@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovPersonaje : MonoBehaviour
 {
-//float velocity = 1f;
+//public float velocity = 1f;
     public float multiplicador = 15f;
 
     private float multiplicadorSalto = 8f;
@@ -23,6 +23,8 @@ public class MovPersonaje : MonoBehaviour
 
     GameObject respawn;
 
+    bool soyAzul;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +33,9 @@ public class MovPersonaje : MonoBehaviour
 
         animatorController = this.GetComponent<Animator>();
 
-        //transform.position = new Vector3( -9f, 0f, 0);
-
         //Respawn
         respawn = GameObject.Find("Respawn");
-        //Respawnear();
         transform.position = respawn.transform.position;
-        //transform.position = respawn.transform.position;
     }
 
     // Update is called once per frame
@@ -128,6 +126,16 @@ public class MovPersonaje : MonoBehaviour
         Debug.Log("vidas: "+GameManager.vidas);
 
         transform.position = respawn.transform.position;
+    }
+
+    public void CambiarColor(){
+
+        if(soyAzul){
+        this.GetComponent<SpriteRenderer>( ).color = Color.white;
+        }else{
+            this.GetComponent<SpriteRenderer>( ).color = Color.white;
+
+        }
     }
 
 }
