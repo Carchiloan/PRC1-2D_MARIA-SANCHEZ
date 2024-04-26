@@ -95,6 +95,7 @@ public class MovPersonaje : MonoBehaviour
 
         //comprobar si me he salido de la pantalla
         if(transform.position.y <= -7){
+            AudioManager.Instance.SonarClipUnaVez(AudioManager.Instance.fxDead);
             Respawnear();
         }   
 

@@ -16,6 +16,10 @@ public class AudioManager : MonoBehaviour
     
     AudioSource _audioSource;
 
+    public GameObject musicObj;
+
+    AudioSource audioMusic;
+
     public static AudioManager Instance;
 
     void Awake(){
@@ -28,21 +32,32 @@ public class AudioManager : MonoBehaviour
         }
 
         
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _audioSource = this.GetComponent<AudioSource>();
-        _audioSource.clip = bandaSonora;
-        _audioSource.loop = true;
-        _audioSource.Play();
+        _audioSource = GetComponent<AudioSource>();
+        
+        audioMusic = musicObj.GetComponent<AudioSource>();
+        audioMusic = this.GetComponent<AudioSource>();
+        audioMusic.clip = bandaSonora;
+        audioMusic.loop = true;
+        audioMusic.volume = 0.2f;
+        audioMusic.Play();
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+//metodo para hacer sonar clips de audio
+    public void SonarClipUnaVez(AudioClip ac ){
+        _audioSource.PlayOneShot(ac);
     }
 }
