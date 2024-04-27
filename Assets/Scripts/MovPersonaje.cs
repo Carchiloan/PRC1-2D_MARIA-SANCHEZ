@@ -139,6 +139,32 @@ public class MovPersonaje : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D col) {
+        //Debug.Log(col.gameObject.name);
+
+        if(col.gameObject.name == "Tunel"){
+            //disparo tunnel
+            AudioManager.Instance.IniciarEfectoTunel();
+        }
+
+        if(col.gameObject.name == "Burbuja"){
+            //disparo tunnel
+            AudioManager.Instance.IniciarEfectoBurbuja();
+        }
+
+        
+    }
+
+    void OnTriggerExit2D(Collider2D col) {
+        if (col.gameObject.name == "Tunel"){
+            AudioManager.Instance.IniciarEfectoDefault();
+        }
+
+        if(col.gameObject.name == "Burbuja"){
+            AudioManager.Instance.IniciarEfectoDefault();
+        }
+    }
+
 }
         
     /*

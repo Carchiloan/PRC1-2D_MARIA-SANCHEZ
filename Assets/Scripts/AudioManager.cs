@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioClip bandaSonora;
-
     public AudioClip fxButton;
-
     public AudioClip fxCoin;
-
     public AudioClip fxDead;
-
     public AudioClip fxFire;
-    
     AudioSource _audioSource;
-
     public GameObject musicObj;
 
+    public AudioMixerSnapshot defaultSnapshot;
+    public AudioMixerSnapshot tunelSnapshot;
+    public AudioMixerSnapshot submarinoSnapshot;
+
     AudioSource audioMusic;
+    
 
     public static AudioManager Instance;
 
@@ -59,5 +59,17 @@ public class AudioManager : MonoBehaviour
 //metodo para hacer sonar clips de audio
     public void SonarClipUnaVez(AudioClip ac ){
         _audioSource.PlayOneShot(ac);
+    }
+
+    public void IniciarEfectoTunel(){
+        tunelSnapshot.TransitionTo(0.5f);
+    }
+
+    public void IniciarEfectoBurbuja(){
+        submarinoSnapshot.TransitionTo(1f);
+    }
+
+    public void IniciarEfectoDefault(){
+        defaultSnapshot.TransitionTo(0.5f);
     }
 }

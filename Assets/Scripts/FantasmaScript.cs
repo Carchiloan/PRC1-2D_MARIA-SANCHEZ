@@ -39,7 +39,7 @@ public class FantasmaScript : MonoBehaviour
         }else{
             transform.position = Vector3.MoveTowards(transform.position, posicionInicial, velocidadFinal);
 
-            if((transform.position = posicionInicial) && _audioSource.isPlaying == true){
+            if((transform.position == posicionInicial) && _audioSource.isPlaying == true){
                 _audioSource.Stop();
                 Debug.Log("STOP!!!");
             }
